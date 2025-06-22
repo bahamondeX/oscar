@@ -1,0 +1,98 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# Environment variables or secrets
+.env
+.env.*
+*.env
+openai_key.txt
+google_key.txt
+
+# macOS system files
+.DS_Store
+
+# Logs and runtime data
+*.log
+*.pid
+*.lock
+
+# Downloads & stream segments
+*.ts
+*.m3u8
+*.mp3
+*.wav
+*.webm
+*.mp4
+*.mkv
+*.part
+*.temp
+*.tmp
+*.cache
+youtube-dl/
+downloads/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Pytest
+.cache/
+.pytest_cache/
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+
+# Torch model checkpoints / cache
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.pb
+*.bin
+lightning_logs/
+checkpoints/
+runs/
+
+# C extensions
+*.so
+
+# mypy / pyright
+.mypy_cache/
+.pytype/
+.pyright/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
+.cache/
+
+# pip wheel cache
+wheels/
+pip-wheel-metadata/
+
+# Other editors or OS files
+*.swp
+*.swo
+*~
+
+# Lockfiles
+poetry.lock
+Pipfile.lock
+.claude

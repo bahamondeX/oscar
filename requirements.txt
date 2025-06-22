@@ -1,0 +1,9 @@
+pyaudio
+openai
+torch==2.1.0
+torchaudio
+requests
+numpy<2
+colorama
+pydub
+python-dotenv
