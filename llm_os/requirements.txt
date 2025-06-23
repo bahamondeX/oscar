@@ -1,0 +1,8 @@
+pyaudio
+openai
+torch==2.1.0
+numpy<2
+pydub
+python-dotenv
+spacy
+rich
