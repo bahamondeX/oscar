@@ -1,13 +1,16 @@
 # src/speaker.py
-from openai import OpenAI
-import pyaudio
 import io
-import tempfile
 import os
+import tempfile
+
+import pyaudio
+import typing_extensions as tpe
 from pydub import AudioSegment  # type: ignore
 from pydub.playback import play  # type: ignore
+from src.typedefs import Component, SpeakerKwargs  # type: ignore
 
-class Speaker:
+
+class Speaker(Component[SpeakerKwargs]):
 
     def __init__(self):
         self.p = pyaudio.PyAudio()
@@ -65,11 +68,13 @@ class Speaker:
         # Try pydub first (handles MP3, WAV, etc.)
         self.play_audio_with_pydub(audio_data)
 
-    def run(self, *, content: str, client: OpenAI):
+    def run(self, **kwargs: tpe.Unpack[SpeakerKwargs]):
+        client = kwargs["client"]
+        content = kwargs["content"]
         response = client.audio.speech.create(
             input=content,
             model="tts-1-hd",
-            voice="nova",
+            voice="es-es-standard-a",
             response_format="mp3",  # Explicitly request MP3 format
         )
 
@@ -83,12 +88,9 @@ class Speaker:
         print(
             f"First few bytes: {audio_data[:10].hex() if len(audio_data) >= 10 else 'N/A'}"
         )
-
         # Play the complete audio
-        self.play_audio(audio_data)
         yield audio_data  # Still yield for compatibility
 
     def __del__(self):
         """Cleanup PyAudio instance"""
-        if hasattr(self, "p"):
-            self.p.terminate()
+        self.p.terminate()

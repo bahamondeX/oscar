@@ -1,7 +1,8 @@
-# main.py
+# src/__init__.py
 from dotenv import load_dotenv
+
 load_dotenv()
 from src import main
 
-if __name__ == '__main__':
-	main()
+if __name__ == "__main__":
+    main()

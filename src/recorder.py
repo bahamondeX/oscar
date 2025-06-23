@@ -1,6 +1,10 @@
 # src/recorder.py
-import pyaudio
 from copy import copy
+
+import pyaudio
+import typing_extensions as tpe
+
+from .typedefs import Component, TypedDict
 
 # Constants
 CHUNK = 2048  # Increased buffer size to prevent overflow
@@ -8,25 +12,26 @@ FORMAT = pyaudio.paInt16  # Audio format (16-bit PCM)
 CHANNELS = 1  # Mono audio
 RATE = 44100  # Sample rate in Hz
 
-class Recorder:
-    def run(self):
-        """
-		Generator function that reads audio from the Mac OS microphone.
 
-		Yields:
-			bytes: The next chunk of audio data from the microphone.
-		"""
+class Recorder(Component[TypedDict]):
+    def run(self, **kwargs: tpe.Unpack[TypedDict]):
+        """
+        Generator function that reads audio from the Mac OS microphone.
+
+        Yields:
+                bytes: The next chunk of audio data from the microphone.
+        """
         p = pyaudio.PyAudio()
 
         # Open a stream to capture audio with larger buffer to prevent overflow
         stream = p.open(
-			format=FORMAT, 
-			channels=CHANNELS, 
-			rate=RATE, 
-			input=True, 
-			frames_per_buffer=CHUNK,
-			input_device_index=None,  # Use default input device
-		)
+            format=FORMAT,
+            channels=CHANNELS,
+            rate=RATE,
+            input=True,
+            frames_per_buffer=CHUNK,
+            input_device_index=None,  # Use default input device
+        )
         self.state = copy(stream)
 
         print("Listening...")
